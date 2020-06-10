@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://sargue.net/jsptags/time" prefix="javatime" %>
+<%@ taglib prefix="javatime" uri="http://sargue.net/jsptags/time" %>
 <html lang="ru">
 <head>
     <title>Meals</title>
@@ -18,7 +18,7 @@
     <c:forEach var="meal" items="${requestScope.mealsList}">
         <tr bgcolor="${meal.excess ? 'red' : 'green'}">
             <td>
-                <javatime:format value="${meal.dateTime}" var="dateTime" pattern="dd.MM.yyyy HH:mm"/>
+                <javatime:format value="${meal.dateTime}" var="dateTime" pattern="yyyy.MM.dd HH:mm"/>
                 <c:out value="${dateTime}"/>
             </td>
             <td>${meal.description}</td>
