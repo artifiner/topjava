@@ -18,7 +18,7 @@
     <c:forEach var="meal" items="${requestScope.mealsList}">
         <tr bgcolor="${meal.excess ? 'red' : 'green'}">
             <td>
-                <javatime:format value="${meal.dateTime}" var="dateTime" pattern="yyyy.MM.dd HH:mm"/>
+                <javatime:format value="${meal.dateTime}" var="dateTime" pattern="yyyy-MM-dd HH:mm"/>
                 <c:out value="${dateTime}"/>
             </td>
             <td>${meal.description}</td>
