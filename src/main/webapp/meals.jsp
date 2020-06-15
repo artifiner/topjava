@@ -35,7 +35,7 @@
         <label for="endTime">To: </label>
         <input type="time" id="endTime" name="endTime" value="${endTime}"/>
         <br>
-        <input type="submit" title="Apply filters">
+        <button type="submit">Apply filters</button>>
     </form>
     <br>
     <br>
