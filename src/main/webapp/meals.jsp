@@ -22,7 +22,23 @@
     <hr/>
     <h2>Meals</h2>
     <a href="meals?action=create">Add Meal</a>
-    <br><br>
+    <br>
+    <h3>Filters</h3>
+    <form action="${pageContext.request.contextPath}/meals">
+        <label for="startDate">From: </label>
+        <input type="date" id="startDate" name="startDate" value="${startDate}"/>
+        <label for="endDate">To: </label>
+        <input type="date" id="endDate" name="endDate" value="${endDate}"/>
+        <br>
+        <label for="startTime">From: </label>
+        <input type="time" id="startTime" name="startTime" value="${startTime}"/>
+        <label for="endTime">To: </label>
+        <input type="time" id="endTime" name="endTime" value="${endTime}"/>
+        <br>
+        <input type="submit" title="Apply filters">
+    </form>
+    <br>
+    <br>
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
         <tr>
