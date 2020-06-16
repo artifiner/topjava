@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface MealRepository {
     // null if not found, when updated
-    Meal save(Meal meal);
+    Meal save(Meal meal, int userId);
 
     // false if not found
     boolean delete(int id, int userId);

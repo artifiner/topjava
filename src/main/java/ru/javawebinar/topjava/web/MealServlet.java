@@ -47,7 +47,7 @@ public class MealServlet extends HttpServlet {
             controller.create(meal);
         } else {
             log.info("Update {}", meal);
-            controller.update(meal, SecurityUtil.authUserId());
+            controller.update(meal, meal.getId());
         }
 
         response.sendRedirect("meals");
@@ -67,7 +67,7 @@ public class MealServlet extends HttpServlet {
             case "create":
             case "update":
                 final Meal meal = "create".equals(action) ?
-                        new Meal(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES), "", 1000, SecurityUtil.authUserId()) :
+                        new Meal(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES), "", 1000, 0) :
                         controller.get(getId(request));
                 request.setAttribute("meal", meal);
                 request.getRequestDispatcher("/mealForm.jsp").forward(request, response);

@@ -23,13 +23,13 @@ public class MealRestController {
 
     public Meal create(Meal meal) {
         log.info("create {}", meal);
-        return service.create(meal);
+        return service.create(meal, SecurityUtil.authUserId());
     }
 
     public void update(Meal meal, int id) {
         log.info("update {} with id={}", meal, id);
         ValidationUtil.assureIdConsistent(meal, id);
-        service.update(meal);
+        service.update(meal, SecurityUtil.authUserId());
     }
 
     public Meal get(int id) {
