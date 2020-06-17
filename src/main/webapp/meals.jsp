@@ -26,14 +26,14 @@
     <h3>Filters</h3>
     <form action="${pageContext.request.contextPath}/meals">
         <label for="startDate">From: </label>
-        <input type="date" id="startDate" name="startDate" value="${startDate}"/>
+        <input type="date" id="startDate" name="startDate" value="${param.startDate}"/>
         <label for="endDate">To: </label>
-        <input type="date" id="endDate" name="endDate" value="${endDate}"/>
+        <input type="date" id="endDate" name="endDate" value="${param.endDate}"/>
         <br>
         <label for="startTime">From: </label>
-        <input type="time" id="startTime" name="startTime" value="${startTime}"/>
+        <input type="time" id="startTime" name="startTime" value="${param.startTime}"/>
         <label for="endTime">To: </label>
-        <input type="time" id="endTime" name="endTime" value="${endTime}"/>
+        <input type="time" id="endTime" name="endTime" value="${param.endTime}"/>
         <br>
         <button type="submit">Apply filters</button>>
     </form>
