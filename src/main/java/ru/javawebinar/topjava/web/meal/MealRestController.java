@@ -23,6 +23,7 @@ public class MealRestController {
 
     public Meal create(Meal meal) {
         log.info("create {}", meal);
+        ValidationUtil.checkNew(meal);
         return service.create(meal, SecurityUtil.authUserId());
     }
 

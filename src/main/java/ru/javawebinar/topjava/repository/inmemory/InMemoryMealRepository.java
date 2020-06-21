@@ -10,6 +10,7 @@ import ru.javawebinar.topjava.util.MealsUtil;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -33,8 +34,7 @@ public class InMemoryMealRepository implements MealRepository {
         log.info("save {}", meal);
         if (meal.isNew()) {
             meal.setId(counter.incrementAndGet());
-            repository.computeIfAbsent(userId, k -> new ConcurrentHashMap<>());
-            repository.get(userId).put(meal.getId(), meal);
+            repository.computeIfAbsent(userId, k -> new ConcurrentHashMap<>()).put(meal.getId(), meal);
             return meal;
         }
         return get(meal.getId(), userId) != null
@@ -72,7 +72,8 @@ public class InMemoryMealRepository implements MealRepository {
     }
 
     public List<Meal> getFilteredByPredicate(int userId, Predicate<Meal> predicate) {
-        return repository.get(userId).values().stream()
+        Map<Integer, Meal> userMeals = repository.get(userId);
+        return  userMeals == null ? Collections.emptyList() : userMeals.values().stream()
                 .filter(predicate)
                 .sorted(Comparator.comparing(Meal::getDate).reversed())
                 .collect(Collectors.toList());
