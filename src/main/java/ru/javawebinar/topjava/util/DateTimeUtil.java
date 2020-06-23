@@ -3,9 +3,11 @@ package ru.javawebinar.topjava.util;
 import org.springframework.lang.Nullable;
 import org.springframework.util.StringUtils;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
@@ -34,5 +36,9 @@ public class DateTimeUtil {
 
     public static @Nullable LocalTime parseLocalTime(@Nullable String str) {
         return StringUtils.isEmpty(str) ? null : LocalTime.parse(str);
+    }
+
+    public static Timestamp asTimestamp(LocalDateTime dateTime) {
+        return new Timestamp(dateTime.toInstant(ZoneOffset.UTC).toEpochMilli());
     }
 }
