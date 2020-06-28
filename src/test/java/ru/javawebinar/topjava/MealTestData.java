@@ -37,6 +37,7 @@ public class MealTestData {
 
     public static Meal getUpdatedMeal() {
         Meal updated = new Meal(MEAL_1_USER_JAN_30_BREAKFAST);
+        updated.setDateTime(LocalDateTime.of(2020, Month.FEBRUARY, 23, 7, 0));
         updated.setDescription("UpdatedBreakfast");
         updated.setCalories(600);
         return updated;
