@@ -29,6 +29,13 @@ public class MealTestData {
 
     public static final List<Meal> MEALS = List.of(MEAL7, MEAL6, MEAL5, MEAL4, MEAL3, MEAL2, MEAL1);
 
+    public static final List<Meal> FILTERED_MEALS = List.of(MEAL2, MEAL1);
+
+    public static final String START_DATE = "2020-01-30";
+    public static final String END_DATE = "2020-01-30";
+    public static final String START_TIME = "00:00:00";
+    public static final String END_TIME = "14:00:00";
+
     public static Meal getNew() {
         return new Meal(null, of(2020, Month.FEBRUARY, 1, 18, 0), "Созданный ужин", 300);
     }
