@@ -62,7 +62,7 @@ public class MealTo {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof MealTo)) {
+        if (obj == null || !this.getClass().equals(obj.getClass())) {
             return false;
         }
         MealTo that = (MealTo) obj;
@@ -75,12 +75,6 @@ public class MealTo {
 
     @Override
     public int hashCode() {
-        int hashCode = 42;
-        hashCode = hashCode * 37 + (id == null ? 0 : id.hashCode());
-        hashCode = hashCode * 37 + (dateTime == null ? 0 : dateTime.hashCode());
-        hashCode = hashCode * 37 + (description == null ? 0 : description.hashCode());
-        hashCode = hashCode * 37 + calories;
-        hashCode = hashCode * 37 + (excess ? 0 : 1);
-        return hashCode;
+        return Objects.hash(id, dateTime, description, calories, excess);
     }
 }
