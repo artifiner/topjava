@@ -3,22 +3,27 @@ package ru.javawebinar.topjava.web.meal;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import ru.javawebinar.topjava.MealTestData;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.service.MealService;
-import ru.javawebinar.topjava.util.MealsUtil;
+import ru.javawebinar.topjava.to.MealTo;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 import ru.javawebinar.topjava.web.AbstractControllerTest;
 import ru.javawebinar.topjava.web.json.JsonUtil;
 
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static ru.javawebinar.topjava.MealTestData.*;
 import static ru.javawebinar.topjava.TestUtil.readFromJson;
+import static ru.javawebinar.topjava.TestUtil.readListFromJsonMvcResult;
 import static ru.javawebinar.topjava.UserTestData.USER_ID;
 
 
@@ -48,10 +53,12 @@ class MealRestControllerTest extends AbstractControllerTest {
 
     @Test
     void getAll() throws Exception {
-        perform(MockMvcRequestBuilders.get(REST_URL))
+        MvcResult result = perform(MockMvcRequestBuilders.get(REST_URL))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MEAL_TO_MATCHER.contentJson(MealsUtil.getTos(MEALS, MealsUtil.DEFAULT_CALORIES_PER_DAY)));
+                .andReturn();
+        List<MealTo> meals = readListFromJsonMvcResult(result, MealTo.class);
+        assertThat(meals).isEqualTo(MEAL_TOS);
     }
 
     @Test
@@ -81,7 +88,7 @@ class MealRestControllerTest extends AbstractControllerTest {
 
     @Test
     void getFiltered() throws Exception {
-        perform(MockMvcRequestBuilders.get(REST_URL + "filter")
+        MvcResult result = perform(MockMvcRequestBuilders.get(REST_URL + "filter")
                 .param("startDate", START_DATE)
                 .param("endDate", END_DATE)
                 .param("startTime", START_TIME)
@@ -89,17 +96,21 @@ class MealRestControllerTest extends AbstractControllerTest {
         )
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MEAL_TO_MATCHER.contentJson(MealsUtil.getTos(FILTERED_MEALS, MealsUtil.DEFAULT_CALORIES_PER_DAY)));
+                .andReturn();
+        List<MealTo> meals = readListFromJsonMvcResult(result, MealTo.class);
+        assertThat(meals).isEqualTo(FILTERED_MEAL_TOS);
     }
     @Test
     void getFilteredNullAndEmpty() throws Exception {
-        perform(MockMvcRequestBuilders.get(REST_URL + "filter")
+        MvcResult result = perform(MockMvcRequestBuilders.get(REST_URL + "filter")
                 .param("startDate", "")
                 .param("endDate", END_DATE)
                 .param("endTime", END_TIME)
         )
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MEAL_TO_MATCHER.contentJson(MealsUtil.getTos(FILTERED_MEALS, MealsUtil.DEFAULT_CALORIES_PER_DAY)));
+                .andReturn();
+        List<MealTo> meals = readListFromJsonMvcResult(result, MealTo.class);
+        assertThat(meals).isEqualTo(FILTERED_MEAL_TOS);
     }
 }
