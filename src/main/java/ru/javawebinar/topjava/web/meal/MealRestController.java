@@ -1,5 +1,6 @@
 package ru.javawebinar.topjava.web.meal;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -58,14 +59,15 @@ public class MealRestController extends AbstractMealController {
     }
 
     @GetMapping("/filter")
-    public List<MealTo> getFiltered(@RequestParam(required = false) String startDate,
-                                   @RequestParam(required = false) String startTime,
-                                   @RequestParam(required = false) String endDate,
-                                   @RequestParam(required = false) String endTime) {
-        LocalDate startDateParsed = parseLocalDate(startDate);
-        LocalDate endDateParsed = parseLocalDate(endDate);
-        LocalTime startTimeParsed = parseLocalTime(startTime);
-        LocalTime endTimeParsed = parseLocalTime(endTime);
-        return super.getBetween(startDateParsed, startTimeParsed, endDateParsed, endTimeParsed);
+    public List<MealTo> getFiltered(@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+                                   @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime startTime,
+                                   @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
+                                   @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime endTime) {
+//        LocalDate startDateParsed = parseLocalDate(startDate);
+//        LocalDate endDateParsed = parseLocalDate(endDate);
+//        LocalTime startTimeParsed = parseLocalTime(startTime);
+//        LocalTime endTimeParsed = parseLocalTime(endTime);
+//        return super.getBetween(startDateParsed, startTimeParsed, endDateParsed, endTimeParsed);
+        return super.getBetween(startDate, startTime, endDate, endTime);
     }
 }

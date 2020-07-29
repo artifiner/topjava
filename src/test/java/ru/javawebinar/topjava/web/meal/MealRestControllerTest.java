@@ -91,4 +91,15 @@ class MealRestControllerTest extends AbstractControllerTest {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(MEAL_TO_MATCHER.contentJson(MealsUtil.getTos(FILTERED_MEALS, MealsUtil.DEFAULT_CALORIES_PER_DAY)));
     }
+    @Test
+    void getFilteredNullAndEmpty() throws Exception {
+        perform(MockMvcRequestBuilders.get(REST_URL + "filter")
+                .param("startDate", "")
+                .param("endDate", END_DATE)
+                .param("endTime", END_TIME)
+        )
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(MEAL_TO_MATCHER.contentJson(MealsUtil.getTos(FILTERED_MEALS, MealsUtil.DEFAULT_CALORIES_PER_DAY)));
+    }
 }
