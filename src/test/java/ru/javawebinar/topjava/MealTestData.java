@@ -27,13 +27,13 @@ public class MealTestData {
     public static final Meal ADMIN_MEAL1 = new Meal(ADMIN_MEAL_ID, of(2020, Month.JANUARY, 31, 14, 0), "Админ ланч", 510);
     public static final Meal ADMIN_MEAL2 = new Meal(ADMIN_MEAL_ID + 1, of(2020, Month.JANUARY, 31, 21, 0), "Админ ужин", 1500);
 
-    public static final MealTo MEAL1_TO = new MealTo(MEAL1.id(), MEAL1.getDateTime(), MEAL1.getDescription(), MEAL1.getCalories(), false);
-    public static final MealTo MEAL2_TO = new MealTo(MEAL2.id(), MEAL2.getDateTime(), MEAL2.getDescription(), MEAL2.getCalories(), false);
-    public static final MealTo MEAL3_TO = new MealTo(MEAL3.id(), MEAL3.getDateTime(), MEAL3.getDescription(), MEAL3.getCalories(), false);
-    public static final MealTo MEAL4_TO = new MealTo(MEAL4.id(), MEAL4.getDateTime(), MEAL4.getDescription(), MEAL4.getCalories(), true);
-    public static final MealTo MEAL5_TO = new MealTo(MEAL5.id(), MEAL5.getDateTime(), MEAL5.getDescription(), MEAL5.getCalories(), true);
-    public static final MealTo MEAL6_TO = new MealTo(MEAL6.id(), MEAL6.getDateTime(), MEAL6.getDescription(), MEAL6.getCalories(), true);
-    public static final MealTo MEAL7_TO = new MealTo(MEAL7.id(), MEAL7.getDateTime(), MEAL7.getDescription(), MEAL7.getCalories(), true);
+    public static final MealTo MEAL1_TO = MealsUtil.createTo(MEAL1, false);
+    public static final MealTo MEAL2_TO = MealsUtil.createTo(MEAL2, false);
+    public static final MealTo MEAL3_TO = MealsUtil.createTo(MEAL3, false);
+    public static final MealTo MEAL4_TO = MealsUtil.createTo(MEAL4, true);
+    public static final MealTo MEAL5_TO = MealsUtil.createTo(MEAL5, true);
+    public static final MealTo MEAL6_TO = MealsUtil.createTo(MEAL6, true);
+    public static final MealTo MEAL7_TO = MealsUtil.createTo(MEAL7, true);
 
     public static final List<Meal> MEALS = List.of(MEAL7, MEAL6, MEAL5, MEAL4, MEAL3, MEAL2, MEAL1);
     public static final List<MealTo> MEAL_TOS = List.of(MEAL7_TO, MEAL6_TO, MEAL5_TO, MEAL4_TO, MEAL3_TO, MEAL2_TO, MEAL1_TO);

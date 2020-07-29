@@ -1,6 +1,7 @@
 package ru.javawebinar.topjava.to;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class MealTo {
     private Integer id;
@@ -61,11 +62,25 @@ public class MealTo {
         if (this == obj) {
             return true;
         }
-        if (!obj.getClass().equals(this.getClass())) {
+        if (!(obj instanceof MealTo)) {
             return false;
         }
         MealTo that = (MealTo) obj;
-        return id.equals(that.id) && dateTime.equals(that.dateTime) && description.equals(that.description)
-                && (calories == that.calories) && (excess == that.excess);
+        return Objects.equals(id, that.id)
+                && Objects.equals(dateTime, that.dateTime)
+                && Objects.equals(description, that.description)
+                && (calories == that.calories)
+                && (excess == that.excess);
+    }
+
+    @Override
+    public int hashCode() {
+        int hashCode = 42;
+        hashCode = hashCode * 37 + (id == null ? 0 : id.hashCode());
+        hashCode = hashCode * 37 + (dateTime == null ? 0 : dateTime.hashCode());
+        hashCode = hashCode * 37 + (description == null ? 0 : description.hashCode());
+        hashCode = hashCode * 37 + calories;
+        hashCode = hashCode * 37 + (excess ? 0 : 1);
+        return hashCode;
     }
 }
